@@ -14,11 +14,11 @@ spec:
       helm:
         valueFiles:
           - $values/argo-cd/helm_values/k3s-ceplea/metallb/values.yaml
-    - repoURL: https://github.com/ionutbalutoiu/home-k8s.git
+    - repoURL: https://github.com/balutoiu/home-k8s.git
       targetRevision: HEAD
       ref: values
     - path: argo-cd/extras/k3s-ceplea/metallb
-      repoURL: https://github.com/ionutbalutoiu/home-k8s.git
+      repoURL: https://github.com/balutoiu/home-k8s.git
       targetRevision: HEAD
       directory:
         recurse: true
