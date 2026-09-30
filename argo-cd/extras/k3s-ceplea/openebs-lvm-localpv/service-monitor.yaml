@@ -1,0 +1,22 @@
+# Scrapes the lvm_* metrics every node plugin serves on :9500. The chart's own
+# ServiceMonitor has no relabeling hook, and alerts need the node name.
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: openebs-lvm-localpv-node
+spec:
+  selector:
+    matchLabels:
+      openebs.io/component-name: openebs-lvm-node
+  endpoints:
+    - port: metrics
+      path: /metrics
+      interval: 30s
+      scrapeTimeout: 10s
+      relabelings:
+        - sourceLabels: [__meta_kubernetes_pod_node_name]
+          targetLabel: node
+      metricRelabelings:
+        # The exporter's `host` is the pod or container hostname, not the node.
+        - action: labeldrop
+          regex: host
