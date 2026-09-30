@@ -10,7 +10,7 @@ fi
 function git_repo_revision() {
     local repo_url=$1
     local revision=$2
-    if echo $repo_url | grep -q "ionutbalutoiu.home-k8s"; then
+    if echo $repo_url | grep -qE "/balutoiu/home-k8s(\.git)?$"; then
         if [[ ! -z $GITHUB_HEAD_REF ]]; then
             revision="$GITHUB_HEAD_REF"
         else
