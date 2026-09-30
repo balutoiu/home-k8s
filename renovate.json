@@ -17,7 +17,7 @@
         "docker"
       ],
       "matchPackageNames": [
-        "ghcr.io/ionutbalutoiu/openvpn",
+        "ghcr.io/balutoiu/openvpn",
         "lscr.io/linuxserver/openssh-server",
         "lscr.io/linuxserver/wireguard"
       ],
