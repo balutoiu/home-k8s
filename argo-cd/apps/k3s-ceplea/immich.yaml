@@ -16,7 +16,7 @@ spec:
           - $values/argo-cd/helm_values/k3s-ceplea/immich/values.yaml
     - chart: cluster
       repoURL: https://cloudnative-pg.github.io/charts
-      targetRevision: 0.8.1
+      targetRevision: 0.9.0
       helm:
         releaseName: immich-postgres
         valueFiles:
