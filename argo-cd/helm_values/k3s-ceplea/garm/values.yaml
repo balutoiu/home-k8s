@@ -274,6 +274,48 @@ configMaps:
 
       k8s.yaml: |
         runnerNamespace: garm
+        # Merged into every runner pod: Docker for a job's services, container jobs and image builds.
+        podTemplate:
+          spec:
+            initContainers:
+              # A native sidecar: dockerd is up before the runner starts and stops when the job ends.
+              - name: dind
+                image: docker:29.8.2-dind
+                restartPolicy: Always
+                args:
+                  - dockerd
+                  - --host=unix:///var/run/docker.sock
+                  # The gid of the docker group in the runner image.
+                  - --group=123
+                securityContext:
+                  privileged: true
+                startupProbe:
+                  exec:
+                    command:
+                      - docker
+                      - info
+                  periodSeconds: 1
+                  failureThreshold: 60
+                resources:
+                  requests:
+                    cpu: 25m
+                    memory: 256Mi
+                  limits:
+                    memory: 4Gi
+                volumeMounts:
+                  - name: dind-sock
+                    mountPath: /var/run
+                  # The runner's path, so dockerd can mount the workspace into a job's containers.
+                  - name: runner
+                    mountPath: /runner
+            containers:
+              - name: runner
+                volumeMounts:
+                  - name: dind-sock
+                    mountPath: /var/run
+            volumes:
+              - name: dind-sock
+                emptyDir: {}
         flavors:
           garm:
             requests:
