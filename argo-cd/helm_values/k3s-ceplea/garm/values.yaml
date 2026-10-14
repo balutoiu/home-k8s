@@ -321,8 +321,9 @@ configMaps:
             requests:
               cpu: 25m
               memory: 512Mi
+            # golangci-lint on pi-platform's orchestrator holds 1.7Gi and thrashed for minutes under a 2Gi limit.
             limits:
-              memory: 2Gi
+              memory: 8Gi
 
 route:
   garm:
