@@ -93,7 +93,7 @@ machine-learning:
           env: *database_env
           image:
             repository: ghcr.io/immich-app/immich-machine-learning
-            tag: v3.3.3
+            tag: v3.3.4
           resources:
             requests:
               cpu: 50m
