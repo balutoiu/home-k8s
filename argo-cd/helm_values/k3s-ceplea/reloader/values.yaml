@@ -5,7 +5,7 @@ reloader:
     replicas: 1
     resources:
       requests:
-        cpu: 5m
+        cpu: 6m
         memory: 96Mi
       limits:
         memory: 128Mi
