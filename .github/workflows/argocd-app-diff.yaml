@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Diff Argo CD apps
-        uses: balutoiu/gha-utils/argocd-app-diff@argocd-app-diff
+        uses: balutoiu/gha-utils/argocd-app-diff@main
         with:
           # Names must match the cluster dirs under argo-cd/apps/.
           clusters: |
