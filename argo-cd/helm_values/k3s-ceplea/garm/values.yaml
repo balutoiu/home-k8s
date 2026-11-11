@@ -287,6 +287,9 @@ configMaps:
                   - --host=unix:///var/run/docker.sock
                   # The gid of the docker group in the runner image.
                   - --group=123
+                  # The pod's MTU; at Docker's default 1500, TLS to hosts like get.helm.sh hangs.
+                  - --mtu=1450
+                  - --default-network-opt=bridge=com.docker.network.driver.mtu=1450
                 securityContext:
                   privileged: true
                 startupProbe:
